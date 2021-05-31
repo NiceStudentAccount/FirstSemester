@@ -10,6 +10,6 @@ def esPrimo(numero):
         return False if numero % x == 0 else True
     
 if esPrimo(int(input('Ingrese el numero: '))) == True:
-    print('El numero ingresado es primo')fds
+    print('El numero ingresado es primo')
 else: 
     print('El numero ingresadono es compuesto')
