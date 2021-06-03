@@ -1,4 +1,4 @@
-print('---------------PROBLEMA 35---------------')
+print('---------------PROBLEMA 35-2---------------')
 #----------------FUNCIONES DE LECTURA-----------------
 
 #función que revisa si se ejecutó el programa por segunda vez y recibe los conjuntos o conserva los
