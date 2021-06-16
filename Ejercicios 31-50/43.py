@@ -37,8 +37,30 @@ def getPolinom():
     return polinomn
 
 def returnPolinom(polinom):
-    x = 0
-    x = 
+    for x in polinom:
+        if x[0] == 0:
+            polinom.remove(x)
+
+    counter = 0
+    poliString = ''
+    while counter < len(polinom):
+
+        if counter != 0 and polinom[counter][0] > 0:
+            poliString += '+'
+
+        if polinom[counter][1] == 0:
+            poliString += str(polinom[counter][0])
+            break
+
+        if polinom[counter][1] == 1:
+            poliString += f'{polinom[counter][0]}x'
+            counter += 1
+            continue
+
+        poliString += f'{polinom[counter][0]}x{polinom[counter][1]}'
+        counter += 1
+    
+    return poliString
 
 #point functions----------------------------------------------------------------------
 
@@ -55,7 +77,6 @@ def evaluate(number, polinomn):
     return answer
 
 def suma(pol1, pol2):
-    polSum = []
     largest = []
     shortest = []
 
@@ -77,6 +98,32 @@ def suma(pol1, pol2):
     return largest
 
 
+def multiplication(pol1, pol2):
+    polMult = []
+    polFinal = []
+
+    #the polinoms are multiplyed
+    for x in pol1:
+        for y in pol2:
+            polMult.append([x[0]*y[0], x[1]+y[1]])
+
+    #the final polinom is simplifyed and the semejant terms are added
+    x = len(pol1)+len(pol2)-2
+    while x >= 0:
+        current = list()
+        for y in polMult:
+            if x == y[1]:
+                current.append(y[0])
+
+        coeficient = 0
+        for y in current:
+            coeficient += y
+
+        polFinal.append((coeficient, x))
+        x -= 1
+
+    return polFinal
+
 
 
 
@@ -94,15 +141,15 @@ while point != 7:
     
     #point 44
     elif point == 2:
-        print(suma(getPolinom(), getPolinom()))
+        print(returnPolinom(suma(getPolinom(), getPolinom())))
 
     #point 45
     elif point == 3:
-        print()
+        print((rest(getPolinom(), getPolinom()))
         
     #point 46
     elif point == 4:
-        print()
+        print(returnPolinom(multiplication(getPolinom(), getPolinom())))
 
     #point 47
     elif point == 5:
