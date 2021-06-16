@@ -37,6 +37,15 @@ def getPolinom():
     return polinomn
 
 def returnPolinom(polinom):
+    #we check if all the coeficients are equal to 0
+    flag = True
+    for x in polinom:
+        if x[0] != 0: 
+            flag = False
+    if flag:
+        return 0
+        
+
     for x in polinom:
         if x[0] == 0:
             polinom.remove(x)
@@ -97,6 +106,31 @@ def suma(pol1, pol2):
 
     return largest
 
+def rest(pol1, pol2):
+    polFinal = []
+
+    #monoms with coeficient 0 are added at the begining so the polinoms are equal in lenght
+    difference = len(pol1)-len(pol2)
+    if difference < 0:
+        lenght = len(pol1)
+        x = 0
+        while x > difference: 
+            pol1.insert(0, [0, lenght-x])
+            x -= 1
+    elif difference > 0:
+        lenght = len(pol2)
+        x = 0
+        while x < difference: 
+            pol2.insert(0, [0, len(pol2)+x])
+            x += 1
+
+    #the substraction between the coeficients is applied
+    x = 0
+    while x < len(pol1):
+        polFinal.append((pol1[x][0]-pol2[x][0], pol1[x][1]))
+        x += 1
+
+    return polFinal
 
 def multiplication(pol1, pol2):
     polMult = []
@@ -127,6 +161,7 @@ def multiplication(pol1, pol2):
 
 
 
+
 #Main---------------------------------------------------------------------------------
 print('Recuerde que los exponentes tienen que ser descendientes. Los exponentes se representan como numeros normales a la derecha de la x\nEjemplo: 4x3+7x2-9x+3')
 point = None
@@ -141,15 +176,15 @@ while point != 7:
     
     #point 44
     elif point == 2:
-        print(returnPolinom(suma(getPolinom(), getPolinom())))
+        print('Suma de los polinomios:', returnPolinom(suma(getPolinom(), getPolinom())))
 
     #point 45
     elif point == 3:
-        print((rest(getPolinom(), getPolinom()))
+        print('Resta de los polinomios:', returnPolinom(rest(getPolinom(), getPolinom())))
         
     #point 46
     elif point == 4:
-        print(returnPolinom(multiplication(getPolinom(), getPolinom())))
+        print('Producto de los polinomios:', returnPolinom(multiplication(getPolinom(), getPolinom())))
 
     #point 47
     elif point == 5:
