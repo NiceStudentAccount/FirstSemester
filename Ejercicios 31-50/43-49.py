@@ -1,4 +1,4 @@
-print('---------------PROBLEMA 43---------------')
+print('---------------PROBLEMA 43-49---------------')
 
 #reading functions--------------------------------------------------------------------
 
@@ -106,7 +106,7 @@ def suma(pol1, pol2):
 
     return largest
 
-def rest(pol1, pol2):
+def substract(pol1, pol2):
     polFinal = []
 
     #monoms with coeficient 0 are added at the begining so the polinoms are equal in lenght
@@ -127,12 +127,15 @@ def rest(pol1, pol2):
     #the substraction between the coeficients is applied
     x = 0
     while x < len(pol1):
-        polFinal.append((pol1[x][0]-pol2[x][0], pol1[x][1]))
+        polFinal.append([pol1[x][0]-pol2[x][0], pol1[x][1]])
+        if polFinal[-1][0] == 0:
+            polFinal.pop()
         x += 1
+    
 
     return polFinal
 
-def multiplication(pol1, pol2):
+def multiply(pol1, pol2):
     polMult = []
     polFinal = []
 
@@ -153,12 +156,98 @@ def multiplication(pol1, pol2):
         for y in current:
             coeficient += y
 
-        polFinal.append((coeficient, x))
+        polFinal.append([coeficient, x])
         x -= 1
 
     return polFinal
 
+def division(pol1, pol2):
+    #variables
+    cotient = list()
+    rest = list()
+    polRep = list()
 
+    while True:
+        #1. the length of polRep is determined 20814410
+        monomial = len(polRep)
+        while monomial < len(pol2):
+            try:
+                polRep.append(pol1.pop(0))
+                monomial += 1
+            except:
+                break
+
+        #if the recidue is 0, then the program finishes
+        if len(polRep) == 0:
+            break
+
+        #if the exponent of the dividend is higher than the residue, then the program finishes
+        if pol2[0][1] > polRep[0][1]:
+            break
+
+        #2. find the factor
+        cotient.append([polRep[0][0]/pol2[0][0], polRep[0][1]-pol2[0][1]])
+
+        #3. multiply
+        rest = list()
+        for x in pol2:
+            rest.append([cotient[-1][0]*x[0], cotient[-1][1]+x[1]])
+
+        #4. substract
+        polRep = substract(polRep, rest)
+
+
+
+    x = 0
+    while x < len(cotient):
+        if cotient[x][0] % 1 == 0:
+            cotient[x][0] = int(cotient[x][0])
+        x += 1
+    
+    return cotient
+
+def residue(pol1, pol2):
+   #variables
+    cotient = list()
+    rest = list()
+    polRep = list()
+
+    while True:
+        #1. the length of polRep is determined 20814410
+        monomial = len(polRep)
+        while monomial < len(pol2):
+            try:
+                polRep.append(pol1.pop(0))
+                monomial += 1
+            except:
+                break
+
+        #if the recidue is 0, then the program finishes
+        if len(polRep) == 0:
+            break
+
+        #if the exponent of the dividend is higher than the residue, then the program finishes
+        if pol2[0][1] > polRep[0][1]:
+            break
+
+        #2. find the factor
+        cotient.append([polRep[0][0]/pol2[0][0], polRep[0][1]-pol2[0][1]])
+
+        #3. multiply
+        rest = list()
+        for x in pol2:
+            rest.append([cotient[-1][0]*x[0], cotient[-1][1]+x[1]])
+
+        #4. substract
+        polRep = substract(polRep, rest)
+
+    x = 0
+    while x < len(polRep):
+        if polRep[x][0] % 1 == 0:
+            polRep[x][0] = int(polRep[x][0])
+        x += 1
+    
+    return polRep
 
 
 
@@ -180,19 +269,19 @@ while point != 7:
 
     #point 45
     elif point == 3:
-        print('Resta de los polinomios:', returnPolinom(rest(getPolinom(), getPolinom())))
+        print('Resta de los polinomios:', returnPolinom(substract(getPolinom(), getPolinom())))
         
     #point 46
     elif point == 4:
-        print('Producto de los polinomios:', returnPolinom(multiplication(getPolinom(), getPolinom())))
+        print('Producto de los polinomios:', returnPolinom(multiply(getPolinom(), getPolinom())))
 
     #point 47
     elif point == 5:
-        print()
+        print('Cociente de los polinomios:', returnPolinom(division(getPolinom(), getPolinom())))
 
     #point 48
     elif point == 6:
-        print()
+        print('Residuo de los polinomios:', returnPolinom(residue(getPolinom(), getPolinom())))
 
     #point 49
     elif point == 7:
