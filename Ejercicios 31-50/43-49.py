@@ -1,7 +1,6 @@
 print('---------------PROBLEMA 43-49---------------')
 
 #reading functions--------------------------------------------------------------------
-
 def getPolinom():
     raw = str(input('Ingrese un polinomio: '))
     #se separa el string en polinomios
@@ -71,8 +70,8 @@ def returnPolinom(polinom):
     
     return poliString
 
-#point functions----------------------------------------------------------------------
 
+#point functions----------------------------------------------------------------------
 def evaluate(number, polinomn):
     exponent = len(polinomn)-1
     answer = 0
@@ -168,7 +167,7 @@ def division(pol1, pol2):
     polRep = list()
 
     while True:
-        #1. the length of polRep is determined 20814410
+        #1. the length of polRep is determined
         monomial = len(polRep)
         while monomial < len(pol2):
             try:
@@ -248,7 +247,6 @@ def residue(pol1, pol2):
         x += 1
     
     return polRep
-
 
 
 #Main---------------------------------------------------------------------------------

@@ -1,4 +1,4 @@
-print('---------------PROBLEMA 51---------------')
+print('---------------PROBLEMA 55---------------')
 
 def inputMatrix(n):
     print('\nMATRIX', n)
@@ -40,29 +40,21 @@ def outputMatrix(mat):
     
     return matrix
 
-def multiplication(mat1, mat2):
-    #it is veirfied if the columns of mat1 are the same as the lines of mat2
-    if len(mat1[0]) != len(mat2):
-        return None
-    
-    #multiply everithing
-    multMat = list()
+def binary(mat, n):
     x = 0
-    while x < len(mat1):
-        multMat.append(list())
-        y = 0 
-        while y < len(mat2[0]):
-            current = 0
-            z = 0 
-            while z < len(mat2):
-                current += mat1[x][z] * mat2[z][y]
-                z += 1
-            multMat[x].append(current)
+    while x < len(mat):
+        y = 0
+        while y < len(mat[0]):
+            if mat[x][y] <= n:
+                mat[x][y] = 0
+            else: 
+                mat[x][y] = 1
             y += 1
         x += 1
-
-    return multMat
+    
+    return mat
 
 #MAIN-------------------------------------------------------    
 print('Insert the matrix lines separed with spaces. To finish type ENTER\n')
-print(outputMatrix(multiplication(inputMatrix(1), inputMatrix(2))))
+
+print(outputMatrix(binary(inputMatrix(1), int(input('Number to evaluate: ')))))

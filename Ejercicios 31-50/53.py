@@ -1,4 +1,4 @@
-print('---------------PROBLEMA 51---------------')
+print('---------------PROBLEMA 53---------------')
 
 def inputMatrix(n):
     print('\nMATRIX', n)
@@ -8,7 +8,7 @@ def inputMatrix(n):
     counter = 1
     while True: 
         #convert the input into a list
-        currentLine = str(input(f'Line {counter}: '))
+        currentLine = str(input(f'Line {counter}: '))  
         if currentLine == '':
             break
         else:
@@ -31,38 +31,11 @@ def inputMatrix(n):
 
     return matrix
 
-def outputMatrix(mat):
-    matrix = '\nFINAL MATRIX:\n'
-    for x in mat:
-        for y in x:
-            matrix += str(f'{y} ')
-        matrix += '\n'
-    
-    return matrix
-
-def multiplication(mat1, mat2):
-    #it is veirfied if the columns of mat1 are the same as the lines of mat2
-    if len(mat1[0]) != len(mat2):
-        return None
-    
-    #multiply everithing
-    multMat = list()
-    x = 0
-    while x < len(mat1):
-        multMat.append(list())
-        y = 0 
-        while y < len(mat2[0]):
-            current = 0
-            z = 0 
-            while z < len(mat2):
-                current += mat1[x][z] * mat2[z][y]
-                z += 1
-            multMat[x].append(current)
-            y += 1
-        x += 1
-
-    return multMat
+def addLine(mat, n):
+    addition = 0
+    addition += sum(mat[n-1])
+    return addition
 
 #MAIN-------------------------------------------------------    
 print('Insert the matrix lines separed with spaces. To finish type ENTER\n')
-print(outputMatrix(multiplication(inputMatrix(1), inputMatrix(2))))
+print('Line addition: ', addLine(inputMatrix(1),int(input('Line: '))))

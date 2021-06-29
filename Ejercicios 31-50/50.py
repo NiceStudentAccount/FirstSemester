@@ -8,8 +8,8 @@ def inputMatrix(n):
     counter = 1
     while True: 
         #convert the input into a list
-        currentLine = str(input(f'Line{counter}: '))
-        if currentLine == 'p':
+        currentLine = str(input(f'Line {counter}: '))
+        if currentLine == '':
             break
         else:
             currentLine = currentLine.split()
@@ -31,6 +31,15 @@ def inputMatrix(n):
 
     return matrix
 
+def outputMatrix(mat):
+    matrix = '\nFINAL MATRIX:\n'
+    for x in mat:
+        for y in x:
+            matrix += str(f'{y} ')
+        matrix += '\n'
+    
+    return matrix
+
 def add(mat1, mat2):
     #checks if the matrixes are of the same dimesions 
     if len(mat1) != len(mat2) or len(mat1[0]) != len(mat2[0]):
@@ -49,5 +58,5 @@ def add(mat1, mat2):
 
 
 #MAIN------------------------------------------------------------
-print('Insert the matrix lines separed with spaces. To finish type p\n(The matrixes have to be of the same dimensions)\n\n')
-print('Suma:', add(inputMatrix(1), inputMatrix(2)))
+print('Insert the matrix lines separed with spaces. To finish type ENTER\n(The matrixes have to be of the same dimensions)\n\n')
+print(outputMatrix(add(inputMatrix(1), inputMatrix(2))))
