@@ -19,7 +19,7 @@ def outputMatrix(mat):
 
 #PROGRAM FUNCTIONS--------------------------------------------
 def espiral(array):
-    #variables 
+    #VARIABLES 
     matLenght = math.sqrt(len(array))
     mat = list()
 
@@ -29,21 +29,17 @@ def espiral(array):
     n = 0
     difference = 1
 
-    #check if the array can be turned into a squared matrix
+    #CHECK IF THE ARRAY CAN BE TURNED INTO A MATRIX 
     if matLenght % 1 != 0:
         print('Error: Lenght of the array doesn\'t have a square root')
         sys.exit()
     else:
         matLenght = int(matLenght)
 
-
     #create the empty array
-    for x in range(matLenght):
-        mat.append([])
-        for y in range(matLenght):
-            mat[x].append(0)
+    mat = [[0 for x in range(matLenght)] for y in range(matLenght)]
 
-    #transform the empty array into spiral one
+    #TRANSFORM THE EMPTY ARRAY INTO A SPIRAL ONE
     #first line
     while column < matLenght-difference:
         mat[line][column] = array[n]
@@ -83,10 +79,7 @@ def espiral(array):
             case += 1
 
     #last square
-    if matLenght % 2 == 0:
-        mat[line][column] = array[-1]
-    else:
-        mat[line][column] = array[-1]
+    mat[line][column] = array[-1]
 
     return mat
 
@@ -94,7 +87,7 @@ def espiral(array):
 
 #MAIN---------------------------------------------------------
 option = int(input('HOW ARE YOU GOING TO FORM THE ARRAY?\n1. Range\n2. Array\n\nOption: '))
-matrix = None
+matrix = None 
 
 if option == 1:
     array = list()
@@ -105,4 +98,4 @@ elif option == 2:
     matrix = espiral(inputArray(str(input('ARRAY: '))))
 
 
-print('SPIRAL MATRIX\n' + outputMatrix(matrix))
+print('\nSPIRAL MATRIX\n' + outputMatrix(matrix))
